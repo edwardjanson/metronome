@@ -4,12 +4,17 @@ import Title from "../components/Title";
 import Slider from "../components/Slider";
 import BPM from "../components/BPM";
 import PlayPause from "../components/PlayPause";
+import Indicator from "../components/Indicator";
+
+import './Metronome.css';
 
 const Metronome = () => {
     const [bpm, setBPM] = useState(100);
     const [isPlaying, setIsPlaying] = useState(false);
     const intervalIdRef = useRef(null);
     const audioRef = useRef(null);
+    const [onOff, setOnOff] = useState(false);
+    // const onOffRef = useRef(false);
 
     const handleBpmChange = (bpm) => {
         console.log("handleBpmChange", bpm)
@@ -21,30 +26,43 @@ const Metronome = () => {
         setIsPlaying(!isPlaying);
     }
 
+    let onOff2 = onOff;
     const playBeat = () => {
-        console.log("Beat", audioRef.current.ended, audioRef.current.currentTime);
-        audioRef.current.currentTime = 0;
-        audioRef.current.play()
+        console.log("playBeat", audioRef.current.ended, audioRef.current.currentTime);
+        if (onOff2) {
+            audioRef.current.currentTime = 0;
+            audioRef.current.play();
+        }
+        // onOffRef.current = !onOffRef.current;
+        onOff2 = !onOff2;
+        setOnOff(!onOff2);
+        // console.log("playBeat", onOff2, onOff);
     }
 
     useEffect(() => {
         if (isPlaying) {
-            const milliSeconds = 60000 / bpm;
+            const milliSeconds = 60000 / bpm / 2;
             clearInterval(intervalIdRef.current);
-            const newIntervalId = setInterval(() => playBeat(), milliSeconds);
+            let newIntervalId = setInterval(() => playBeat(), milliSeconds);
             intervalIdRef.current = newIntervalId;
             console.log("called setInterval", newIntervalId, milliSeconds)
         } else {
             clearInterval(intervalIdRef.current);
             intervalIdRef.current = null;
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [bpm, isPlaying])
 
-    return <div>
+    return <div className="Metronome">
         <Title title={"Metronome"} />
         <Slider bpm={bpm} onBpmChange={handleBpmChange} />
-        <BPM bpm={bpm} />
-        <PlayPause isPlaying={isPlaying} onClick={handleButtonClick} />
+
+        <div className="controls">
+            <BPM bpm={bpm} />
+            <PlayPause isPlaying={isPlaying} onClick={handleButtonClick} />
+        </div>
+
+        <Indicator onOff={onOff} isPlaying={isPlaying}/>
 
         <audio ref={audioRef} src="/beat.wav" />
     </div>

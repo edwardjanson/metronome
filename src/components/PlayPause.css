@@ -1,6 +1,6 @@
 :is(.Play, .Pause) img {
-    width: 200px;
-    height: 200px;
+    width: 2rem;
+    height: 2rem;
 }
 
 .Play, .Pause {

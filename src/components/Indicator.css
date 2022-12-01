@@ -1,0 +1,19 @@
+.Indicator {
+    width: 100px;
+    height: 10px;
+    background: green;
+    transition: width 0.5s;
+    /* transition: background 0.5s; */
+    /* border: 1px solid black; */
+}
+
+.Indicator.Beat {
+    background: greenyellow;
+    width: 300px;
+    /* transition: background 0.1s; */
+    transition: width 0.1s;
+}
+
+.Indicator.Idle {
+    background: grey;
+}

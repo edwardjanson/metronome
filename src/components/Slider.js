@@ -7,10 +7,11 @@ const Slider = ({bpm, onBpmChange}) => {
             setTimeout(() => { 
                 onBpmChange(event.target.value);
                 timeoutCompleted = true;
-            }, 1000)
+            }, 100)
         }
     };
-    return <input type="range" min="40" max="218" defaultValue={bpm} 
+    return <input className="Slider"
+        type="range" min="40" max="218" defaultValue={bpm} 
         onChange={handleChange} />
 }
 

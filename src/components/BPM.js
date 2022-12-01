@@ -1,5 +1,5 @@
 const BPM = ({bpm}) => {
-    return <div>{bpm}</div>
+    return <div className="BPM">{bpm} BPM</div>
 }
 
 export default BPM;
