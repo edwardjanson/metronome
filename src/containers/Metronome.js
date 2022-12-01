@@ -14,7 +14,6 @@ const Metronome = () => {
     const intervalIdRef = useRef(null);
     const audioRef = useRef(null);
     const [onOff, setOnOff] = useState(false);
-    // const onOffRef = useRef(false);
 
     const handleBpmChange = (bpm) => {
         console.log("handleBpmChange", bpm)
@@ -26,22 +25,20 @@ const Metronome = () => {
         setIsPlaying(!isPlaying);
     }
 
-    let onOff2 = onOff;
     const playBeat = () => {
         console.log("playBeat", audioRef.current.ended, audioRef.current.currentTime);
-        if (onOff2) {
-            audioRef.current.currentTime = 0;
-            audioRef.current.play();
-        }
-        // onOffRef.current = !onOffRef.current;
-        onOff2 = !onOff2;
-        setOnOff(!onOff2);
-        // console.log("playBeat", onOff2, onOff);
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+        setOnOff(true);
+        let milliSeconds = 60000 / bpm / 2;
+        if (milliSeconds > 200)
+            milliSeconds = 200;
+        setTimeout(() => setOnOff(false), milliSeconds);
     }
 
     useEffect(() => {
         if (isPlaying) {
-            const milliSeconds = 60000 / bpm / 2;
+            const milliSeconds = 60000 / bpm;
             clearInterval(intervalIdRef.current);
             let newIntervalId = setInterval(() => playBeat(), milliSeconds);
             intervalIdRef.current = newIntervalId;
