@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/metronome/static/css/main.6cad0dd4.css",
+    "main.js": "/metronome/static/js/main.c82bb159.js",
+    "index.html": "/metronome/index.html",
+    "main.6cad0dd4.css.map": "/metronome/static/css/main.6cad0dd4.css.map",
+    "main.c82bb159.js.map": "/metronome/static/js/main.c82bb159.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6cad0dd4.css",
+    "static/js/main.c82bb159.js"
+  ]
+}
